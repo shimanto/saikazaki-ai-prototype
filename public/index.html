@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>雑賀崎漁港 AI活用提案（公開資料・プロトタイプ）</title>
+<meta name="description" content="和歌山市・雑賀崎漁港の賑わいづくりに向けたAI活用提案。駐車場の見える化、滞在ポイントとデジタルチケット、滞在の受け皿づくりの3本柱と、動くプロトタイプ。">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="demo-band">このサイトは提案用のプロトタイプです。駐車場の判定・ポイント・チケットはデモで、実際の店舗・駐車場とはまだ連携していません。</div>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="/">雑賀崎漁港 AI活用提案</a>
+  <nav><a href="/" aria-current="page">提案資料</a><a href="/parking/">駐車場デモ</a><a href="/app/">ポイントアプリ</a><a href="/app/qr/">拠点QR</a></nav>
+</div></header>
+
+<div class="hero"><div class="inner">
+  <div class="eyebrow">公開資料 ／ 和歌山市・雑賀崎漁港</div>
+  <h1>漁港に来た人が「止めやすく、長く居たくなる」仕組みを、AIとスマホで。</h1>
+  <p>駐車場の見える化・滞在ポイントとデジタルチケット・滞在の受け皿づくりの3本柱で、雑賀崎漁港の賑わいを支える提案です。</p>
+</div></div>
+
+<main>
+<p class="notice info small">このページの数値は、公表資料に載っている数値だけを使っています（出典はページ下部）。このプロトタイプによる実績・効果の数値はまだありません。</p>
+
+<section id="background">
+  <h2>背景: 水揚げが10年前の半分以下に</h2>
+  <div class="cards c3">
+    <div class="card tint"><div class="muted small">水揚げ量（令和4年）</div><div class="stat">約128<small> トン</small></div><div class="small">10年前の約47%</div></div>
+    <div class="card tint"><div class="muted small">水揚金額（令和4年）</div><div class="stat">約1億9,760<small> 万円</small></div></div>
+    <div class="card tint"><div class="muted small">この10年の変化</div><div class="stat">約53<small> %減</small></div><div class="small">水揚げ量が10年前の約47%に（上の数値からの計算）</div></div>
+  </div>
+  <p class="src">出典: 水産庁「浜の活力再生プラン（第3期）」[1]</p>
+</section>
+
+<section id="issues">
+  <h2>課題: 人が来ても、止められない・居場所がない</h2>
+  <div class="cards c3">
+    <div class="card"><h3>駐車場は110台</h3><p class="small">イベントや販売日に来訪が集中すると、駐車場が足りなくなる。空いているかどうかが、来る前に分からない。</p></div>
+    <div class="card"><h3>細い道への車の集中・路上駐車</h3><p class="small">漁港までの道は細く、車が集中すると渋滞や路上駐車が起き、地域の生活や漁業の作業に影響する。</p></div>
+    <div class="card"><h3>飲食・休憩の場所が足りない</h3><p class="small">魚を買ったあとに食べる・休む場所が少なく、滞在が短くなりやすい。</p></div>
+  </div>
+  <p class="notice small" style="margin-top:12px">和歌山市は <strong>2026年11月23日〜29日</strong>、船上販売を核とした賑わいの実証を行います。来訪が集中する場面での駐車と滞在の課題を確かめる機会になります。</p>
+  <p class="src">出典: 駐車台数・実証の日程は和歌山市の公表資料 [2]</p>
+</section>
+
+<section id="pillars">
+  <h2>提案の3本柱</h2>
+  <div class="cards c3">
+    <div class="card sand">
+      <span class="pillar-no">柱1</span>
+      <h3>駐車場の見える化</h3>
+      <p class="small">定点カメラの画像からAIで駐車マスごとの空き・占有を判定し、空き台数と混雑度をスマホに表示。来る前に「今は混んでいる」が分かれば、時間をずらす・別の駐車場を使うといった行動につながり、細い道への集中を減らせる。</p>
+      <a class="btn small" href="/parking/">駐車場デモを見る</a>
+    </div>
+    <div class="card sand">
+      <span class="pillar-no">柱2</span>
+      <h3>滞在ポイントとデジタルチケット</h3>
+      <p class="small">到着・店舗・捌き方教室・出発の各拠点のQRをLINEで読み取ってポイントを貯める。滞在時間もポイントになり、500ptで次回の買い物に使えるデジタルチケットを発行。「長く居る」「また来る」を後押しし、出発の記録で駐車場の回転も把握できる。</p>
+      <a class="btn small" href="/app/">ポイントアプリを試す</a>
+    </div>
+    <div class="card sand">
+      <span class="pillar-no">柱3</span>
+      <h3>滞在の受け皿づくり</h3>
+      <p class="small">ポイントの使い道と、長く居る理由を現地に用意する。</p>
+      <ul class="small">
+        <li>カフェ・飲食（買った魚をその場で食べる）</li>
+        <li>魚の捌き方教室</li>
+        <li>包丁・まな板・クーラーボックスの販売（買った魚を持ち帰る・家で捌く）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <h2>来訪者の流れ（想定）</h2>
+  <table>
+    <thead><tr><th>場面</th><th>来訪者がすること</th><th>仕組み</th></tr></thead>
+    <tbody>
+      <tr><td>来る前</td><td>スマホで駐車場の空き・混雑度を見る</td><td>柱1 駐車場の見える化</td></tr>
+      <tr><td>到着</td><td>駐車場・入口のQRを読み取る（50pt）</td><td>柱2 滞在ポイント</td></tr>
+      <tr><td>滞在中</td><td>鮮魚・船上販売、カフェ、捌き方教室でQRを読み取る</td><td>柱2・柱3</td></tr>
+      <tr><td>出発</td><td>出発のQRを読み取る（滞在時間に応じて加算）</td><td>柱2（駐車場の回転も把握）</td></tr>
+      <tr><td>次回</td><td>500ptで発行したチケットを買い物に使う</td><td>柱2 デジタルチケット</td></tr>
+    </tbody>
+  </table>
+  <p class="small muted">ポイントの点数はプロトタイプの初期値です。実証時に店舗・関係者と決めます。</p>
+</section>
+
+<section id="fund">
+  <h2>活用を想定する助成金</h2>
+  <div class="card">
+    <h3>令和9年度 ファンド事業助成金（元気ファンド）</h3>
+    <table>
+      <tbody>
+        <tr><th>助成率</th><td>2/3以内</td></tr>
+        <tr><th>上限額</th><td>分野B: 600万円</td></tr>
+        <tr><th>申請締切</th><td>2027年1月22日 17時必着</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted">申請の前に、最新の公募要領で対象・要件・締切を必ず確認してください。</p>
+  </div>
+  <p class="src">出典: 和歌山県・公益財団法人わかやま産業振興財団 ファンド事業の公募情報 [3]</p>
+</section>
+
+<section id="prototype">
+  <h2>このプロトタイプでできること</h2>
+  <div class="cards c3">
+    <div class="card"><h3><a href="/parking/">駐車場デモ</a></h3><p class="small">国土地理院の航空写真に車を合成した疑似画像で、マスごとの空き・占有を判定。結果はJSON（<code>/api/parking/status</code>）でも取得できます。</p></div>
+    <div class="card"><h3><a href="/app/">ポイントアプリ</a></h3><p class="small">LINEログイン（未接続の間はデモモード）、QRチェックイン、ポイント、500ptのデジタルチケット発行。</p></div>
+    <div class="card"><h3><a href="/app/qr/">拠点QRの発行</a></h3><p class="small">到着・店舗・教室・出発の各拠点に貼るQRを印刷できます。</p></div>
+  </div>
+</section>
+
+<section id="sources">
+  <h2>出典</h2>
+  <ol class="sources">
+    <li>水産庁「浜の活力再生プラン（第3期）」— 水揚げ量（令和4年 約128トン、10年前の47%）、水揚金額（約1億9,760万円）</li>
+    <li>和歌山市の公表資料 — 漁港の駐車場（110台）、船上販売を核とした賑わい実証（2026年11月23日〜29日）</li>
+    <li>和歌山県「ファンド事業」<a href="https://www.pref.wakayama.lg.jp/prefg/061000/fund/fund.html" rel="noopener">https://www.pref.wakayama.lg.jp/prefg/061000/fund/fund.html</a>、公益財団法人わかやま産業振興財団 — 令和9年度ファンド事業助成金の概要</li>
+    <li>航空写真: 国土地理院 地理院タイル（全国最新写真（シームレス））<a href="https://maps.gsi.go.jp/development/ichiran.html" rel="noopener">https://maps.gsi.go.jp/development/ichiran.html</a></li>
+  </ol>
+</section>
+</main>
+<footer>雑賀崎漁港 AI活用提案 プロトタイプ ／ 航空写真: 国土地理院 ／ <a href="https://github.com/shimanto/saikazaki-ai-prototype">ソースコード</a></footer>
+</body>
+</html>

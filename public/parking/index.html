@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>駐車場の画像認識デモ ｜ 雑賀崎漁港 AI活用提案</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="demo-band">デモ: 国土地理院の航空写真に車を合成した疑似画像を判定しています。実際の駐車状況ではありません。</div>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="/">雑賀崎漁港 AI活用提案</a>
+  <nav><a href="/">提案資料</a><a href="/parking/" aria-current="page">駐車場デモ</a><a href="/app/">ポイントアプリ</a><a href="/app/qr/">拠点QR</a></nav>
+</div></header>
+
+<main>
+<h1 style="font-size:1.35rem;margin:4px 0 6px">駐車場の画像認識デモ <span class="badge demo">デモ</span></h1>
+<p class="small muted">駐車マスごとに「空き／占有」を画像から判定し、空き台数と混雑度を出す仕組みの雛型です。将来は定点カメラの画像に差し替えます。</p>
+
+<section>
+  <h2>場所（地理院タイル）</h2>
+  <div class="tilemap" id="tilemap" aria-label="雑賀崎漁港周辺の航空写真"></div>
+  <p class="src">出典: <a href="https://maps.gsi.go.jp/development/ichiran.html" rel="noopener">国土地理院 地理院タイル（全国最新写真（シームレス））</a>。黄色の枠がデモで使う駐車場エリア。区画はデモ用に定義したものです。</p>
+</section>
+
+<section>
+  <h2>判定</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div><div class="small muted">入力画像（サンプル）</div><div class="seg" id="scenes"></div></div>
+    <div><div class="small muted">判定方法</div>
+      <div class="seg" id="methods">
+        <button type="button" data-method="reference" aria-pressed="true">基準画像との差分</button>
+        <button type="button" data-method="features" aria-pressed="false">特徴量のみ</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards c4" style="margin-top:12px">
+    <div class="card tint"><div class="small muted">空き</div><div class="stat" id="vacant">-</div></div>
+    <div class="card"><div class="small muted">占有</div><div class="stat" id="occupied">-</div></div>
+    <div class="card"><div class="small muted">占有率</div><div class="stat" id="rate">-</div></div>
+    <div class="card"><div class="small muted">混雑度</div><div class="stat" id="congestion">-</div></div>
+  </div>
+  <p class="small muted" id="source-line"></p>
+
+  <div class="legend"><span><i style="background:#1f8a4c"></i>空き</span><span><i style="background:#c0392b"></i>占有</span><span class="muted">マスを押すと判定の数値を表示</span></div>
+  <div class="canvas-wrap"><canvas id="view" width="760" height="720"></canvas></div>
+  <p class="small" id="stall-info" aria-live="polite">&nbsp;</p>
+  <p class="src" id="attribution">出典: 国土地理院 地理院タイル（全国最新写真（シームレス））を加工して作成（車両は合成した疑似画像）</p>
+
+  <h3 style="margin-top:16px">マスごとの状態</h3>
+  <div class="stall-grid" id="stall-grid"></div>
+  <p class="small" style="margin-top:10px">API: <a id="api-link" href="/api/parking/status">/api/parking/status</a>（同じ結果をJSONで返します）</p>
+  <p class="small muted" id="accuracy"></p>
+</section>
+
+<section>
+  <h2>画像を差し替えて試す</h2>
+  <p class="small">手元の画像を選ぶと、<strong>このブラウザの中だけで</strong>同じ判定ロジックを動かします（画像はサーバーに送りません）。マスの位置は上の駐車場に合わせてあるため、同じ範囲・向きの画像でないと正しく判定できません。</p>
+  <div class="btn-row">
+    <label class="btn secondary"><input type="file" id="upload" accept="image/*" hidden>画像を選ぶ</label>
+    <button class="btn secondary" type="button" id="back-to-sample" hidden>サンプルに戻す</button>
+  </div>
+  <p class="small muted" id="upload-note"></p>
+</section>
+
+<section>
+  <h2>判定のしくみ（雛型）</h2>
+  <ol class="small">
+    <li>航空写真の白線に合わせて、駐車マスを1つずつ四角形（ポリゴン）で定義しています。</li>
+    <li>マスの内側（白線を避けるため少し縮めた範囲）の画素から特徴量を求めます。</li>
+    <li><strong>基準画像との差分</strong>: 空車のときの画像と比べ、色の差の平均が閾値を超えたら「占有」。通路の明るさで露出の違いを補正します。</li>
+    <li><strong>特徴量のみ</strong>: 基準画像を使わず、明るさのばらつき（テクスチャ）・舗装色との違い・彩度から判定します。</li>
+    <li>占有率から混雑度を4段階（空いています／やや混雑／混雑／満車に近い）で出します。</li>
+  </ol>
+  <p class="small muted">疑似画像は判定しやすいため、ここでの正解率は実際のカメラ画像での精度を表しません。実運用では定点カメラの画像を集め、車両検出モデルなどに置き換える想定です（<a href="https://github.com/shimanto/saikazaki-ai-prototype/blob/main/docs/design.md">設計書</a>）。</p>
+</section>
+</main>
+<footer>雑賀崎漁港 AI活用提案 プロトタイプ ／ 航空写真: 国土地理院</footer>
+<script type="module" src="/js/parking-page.js"></script>
+</body>
+</html>

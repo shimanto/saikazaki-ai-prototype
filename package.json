@@ -1,0 +1,16 @@
+{
+  "name": "saikazaki-ai-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate": "wrangler d1 migrations apply saikazaki-ai-prototype --remote",
+    "db:migrate:local": "wrangler d1 migrations apply saikazaki-ai-prototype --local",
+    "scenes": "python tools/make_scenes.py",
+    "eval": "node tools/eval_detect.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.166.0"
+  }
+}

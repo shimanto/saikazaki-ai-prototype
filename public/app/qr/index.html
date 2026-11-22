@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>拠点QRコードの発行（印刷用） ｜ 雑賀崎漁港 AI活用提案</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="demo-band">プロトタイプです。印刷したQRは実証・デモ用です。</div>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="/">雑賀崎漁港 AI活用提案</a>
+  <nav><a href="/">提案資料</a><a href="/parking/">駐車場デモ</a><a href="/app/">ポイントアプリ</a><a href="/app/qr/" aria-current="page">拠点QR</a></nav>
+</div></header>
+<main>
+  <div class="no-print">
+    <h1 style="font-size:1.35rem;margin:4px 0 6px">拠点QRコードの発行（印刷用）</h1>
+    <p class="small">各拠点に貼るQRコードです。ポイントアプリの「カメラでQRを読み取る」か、スマホのカメラで読み取るとチェックインできます（未ログインならログイン後にチェックイン）。</p>
+    <div class="btn-row" style="margin-bottom:16px"><button class="btn" type="button" onclick="window.print()">印刷する</button></div>
+  </div>
+  <div class="qr-sheet" id="sheet"><p class="small muted">読み込み中…</p></div>
+</main>
+<footer>雑賀崎漁港 AI活用提案 プロトタイプ</footer>
+<script src="/vendor/qrcode.js"></script>
+<script src="/js/qr-print.js"></script>
+</body>
+</html>
