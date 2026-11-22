@@ -1,0 +1,28 @@
+{
+  // 静的アセット（public/）+ Worker API（src/）+ D1
+  "name": "saikazaki-ai-prototype",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/auth/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "saikazaki-ai-prototype",
+      "database_id": "f76e440b-f359-460b-bdc9-5d376ca9af4b",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "observability": { "enabled": true }
+  // LINE ログインの設定は secret で入れる（値をここに書かない）:
+  //   npx wrangler secret put LINE_CHANNEL_ID
+  //   npx wrangler secret put LINE_CHANNEL_SECRET
+  //   npx wrangler secret put LINE_CALLBACK_URL
+  // 3 つとも未設定のあいだはデモモード（モックユーザーでログイン）で動く。
+}

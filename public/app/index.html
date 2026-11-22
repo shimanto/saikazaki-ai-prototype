@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>滞在ポイントアプリ ｜ 雑賀崎漁港 AI活用提案</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="demo-band">プロトタイプです。ポイント・チケットは実際の店舗では使えません。</div>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="/">雑賀崎漁港 AI活用提案</a>
+  <nav><a href="/">提案資料</a><a href="/parking/">駐車場デモ</a><a href="/app/" aria-current="page">ポイントアプリ</a><a href="/app/qr/">拠点QR</a></nav>
+</div></header>
+
+<main>
+<h1 style="font-size:1.35rem;margin:4px 0 6px">雑賀崎 滞在ポイント</h1>
+<p class="notice" id="mode-demo" hidden><strong>デモモード（LINE未接続）</strong>: LINEのチャネルがまだ設定されていないため、仮の利用者（モックユーザー）でログインします。データはこのアプリの中でだけ使います。</p>
+<p class="notice" id="error-box" hidden></p>
+
+<!-- 未ログイン -->
+<section id="login-view" hidden>
+  <div class="card tint">
+    <h2 style="border:0;padding:0">ログイン</h2>
+    <p class="small">漁港の拠点（到着・お店・捌き方教室・出発）でQRを読み取るとポイントが貯まり、500ptで次回のお買い物に使えるデジタルチケットを発行できます。</p>
+    <a class="btn line block" id="line-login" href="/auth/login" hidden>LINEでログイン</a>
+    <button class="btn block" type="button" id="demo-login" hidden>デモ利用者としてログイン</button>
+    <p class="small muted" style="margin-top:10px">取得するのはLINEの表示名と内部IDだけです（メールアドレス・電話番号は取得しません）。</p>
+  </div>
+  <p class="small notice info" id="pending-checkin" hidden>QRコードを読み取りました。ログインするとチェックインします。</p>
+</section>
+
+<!-- ログイン後 -->
+<section id="main-view" hidden>
+  <div class="wallet">
+    <div class="small" style="opacity:.85"><span id="user-name"></span> さんのポイント</div>
+    <div class="pts"><span id="balance">0</span><small> pt</small></div>
+    <div class="progress"><span id="progress" style="width:0%"></span></div>
+    <div class="small" id="to-ticket"></div>
+    <button class="btn block" type="button" id="issue" style="margin-top:10px;background:#ffde59;color:#073f52;border-color:#ffde59" disabled>500ptでチケットを発行</button>
+  </div>
+
+  <section>
+    <h2>チェックイン</h2>
+    <button class="btn block" type="button" id="scan">カメラでQRを読み取る</button>
+    <div class="scanner" id="scanner" hidden style="margin-top:10px">
+      <video id="video" playsinline muted></video>
+      <p class="small muted" id="scan-msg">拠点のQRコードを枠内に写してください。</p>
+      <button class="btn secondary block" type="button" id="scan-stop">読み取りをやめる</button>
+    </div>
+    <details style="margin-top:12px" id="demo-buttons-box" open>
+      <summary class="small">デモ用: QRの代わりにボタンでチェックイン</summary>
+      <div class="spot-buttons" id="spot-buttons" style="margin-top:8px"></div>
+    </details>
+  </section>
+
+  <section>
+    <h2>今回の来訪</h2>
+    <div id="visit" class="small muted">まだ到着チェックインをしていません。</div>
+  </section>
+
+  <section>
+    <h2>デジタルチケット</h2>
+    <p class="small muted">次回のお買い物で使えるチケットです。割引などの内容は実証時に店舗と決めます（デモ表示）。</p>
+    <div id="tickets" style="display:flex;flex-direction:column;gap:8px"></div>
+  </section>
+
+  <section>
+    <h2>ポイントの履歴</h2>
+    <ul class="list" id="ledger"></ul>
+  </section>
+
+  <section>
+    <h2>ポイントのルール（プロトタイプの初期値）</h2>
+    <table class="small">
+      <tbody>
+        <tr><td>到着（駐車場・入口）</td><td>50pt（1日1回）</td></tr>
+        <tr><td>鮮魚・船上販売</td><td>100pt（1来訪1回）</td></tr>
+        <tr><td>カフェ・飲食</td><td>100pt（1来訪1回）</td></tr>
+        <tr><td>魚の捌き方教室</td><td>200pt（1来訪1回）</td></tr>
+        <tr><td>出発</td><td>50pt ＋ 滞在10分ごとに10pt（上限300pt）</td></tr>
+        <tr><td>チケット</td><td>500ptで1枚発行</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="btn-row">
+    <button class="btn secondary small" type="button" id="logout">ログアウト</button>
+    <button class="btn secondary small" type="button" id="reset" hidden>デモデータをリセット</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast" hidden role="status"></div>
+<footer>雑賀崎漁港 AI活用提案 プロトタイプ</footer>
+<script src="/vendor/jsQR.js"></script>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
