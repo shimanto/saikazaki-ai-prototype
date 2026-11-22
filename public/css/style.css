@@ -45,6 +45,7 @@ h3 { font-size: 1.05rem; margin: 0 0 6px; }
 .small { font-size: 0.85rem; }
 
 .cards { display: grid; gap: 12px; grid-template-columns: 1fr; }
+.cards.c4 { grid-template-columns: 1fr 1fr; gap: 8px; }
 @media (min-width: 640px) { .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: repeat(3, 1fr); } .cards.c4 { grid-template-columns: repeat(4, 1fr); } }
 .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; background: #fff; }
 .card.tint { background: var(--sea-light); border-color: #cfe6ee; }
@@ -94,7 +95,8 @@ footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 16px; fon
 .stall-grid { display: flex; flex-direction: column; gap: 6px; }
 .stall-row { display: flex; gap: 3px; flex-wrap: wrap; align-items: center; }
 .stall-row b { width: 1.6em; font-size: 0.8rem; }
-.stall { width: 18px; height: 18px; border-radius: 3px; }
+.stall { width: 14px; height: 14px; border-radius: 3px; }
+@media (min-width: 640px) { .stall { width: 18px; height: 18px; } }
 .stall.occupied { background: var(--busy); }
 .stall.vacant { background: var(--ok); }
 .congestion-1 { color: var(--ok); } .congestion-2 { color: var(--warn); } .congestion-3, .congestion-4 { color: var(--busy); }
